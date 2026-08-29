@@ -1,0 +1,117 @@
+---
+const path = Astro.url.pathname;
+---
+
+<div class="sidebar">
+    <div class="category">
+        <div class="category-title">converters</div>
+
+        <a
+            href="/base-converter"
+            class={path === "/base-converter" ? "active item" : "item"}
+        >
+            <div class="icon">
+                <img src="/assets/.svg" alt="" />
+            </div>
+            <div>Base Converter</div>
+        </a>
+
+        <a href="/a" class={path === "/a" ? "active item" : "item"}>
+            <div class="icon">
+                <img src="/assets/.svg" alt="" />
+            </div>
+            <div>Case Converter</div>
+        </a>
+
+        <a href="/b" class={path === "/b" ? "active item" : "item"}>
+            <div class="icon">
+                <img src="/assets/.svg" alt="" />
+            </div>
+            <div>Color Converter</div>
+        </a>
+    </div>
+
+    <div class="category">
+        <div class="category-title">generators</div>
+
+        <a href="/c" class={path === "/c" ? "active item" : "item"}>
+            <div class="icon">
+                <img src="/assets/.svg" alt="" />
+            </div>
+            <div>Password Generator</div>
+        </a>
+
+        <a href="/d" class={path === "/d" ? "active item" : "item"}>
+            <div class="icon">
+                <img src="/assets/.svg" alt="" />
+            </div>
+            <div>Random Data Generator</div>
+        </a>
+    </div>
+</div>
+
+<style>
+    .sidebar {
+        width: 240px;
+        padding: 16px;
+        color: white;
+    }
+
+    .category {
+        margin-top: 6px;
+    }
+
+    .category-title {
+        margin: 4px 8px;
+
+        color: #474747;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        padding: 6px;
+        border-radius: 10px;
+
+        color: #dadada;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .item:hover {
+        background: #1e2027;
+    }
+
+    .item.active {
+        background: #1e2027;
+    }
+
+    .icon {
+        position: relative;
+
+        width: 30px;
+        height: 30px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 8px;
+        background: #151515;
+    }
+
+    .active .icon {
+        background: #27282e;
+    }
+
+    .icon img {
+        width: 16px;
+        height: 16px;
+    }
+</style>

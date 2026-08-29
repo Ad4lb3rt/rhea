@@ -1,0 +1,103 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <div class="content">
+        <div class="inputs-container">
+            <div class="inputs">
+                <label>input</label>
+                <input />
+            </div>
+            <div class="inputs">
+                <label>base</label>
+                <input type="number" />
+            </div>
+        </div>
+
+        <div class="outputs">
+            <div class="output">
+                <label>Binary</label>
+                <div class="output-value">00000000</div>
+            </div>
+
+            <div class="output">
+                <label>Octal</label>
+                <div class="output-value">00000000</div>
+            </div>
+
+            <div class="output">
+                <label>Decimal</label>
+                <div class="output-value">00000000</div>
+            </div>
+
+            <div class="output">
+                <label>Hexadecimal</label>
+                <div class="output-value">00000000</div>
+            </div>
+
+            <div class="output">
+                <label>Base36</label>
+                <div class="output-value">00000000</div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    label {
+        font-size: 14px;
+        color: white;
+    }
+
+    input {
+        width: 200px;
+
+        padding: 10px;
+
+        outline: none;
+
+        border-radius: 12px;
+        border: 1px solid #252525;
+
+        background-color: #191919;
+        color: white;
+
+        font-size: 14px;
+    }
+
+    .inputs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .outputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 32px;
+    }
+
+    .output {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .output-value {
+        background-color: #141414;
+        border: 1px solid #191919;
+        padding: 10px;
+        width: 200px;
+        border-radius: 12px;
+        font-size: 14px;
+        height: 17px;
+    }
+</style>
