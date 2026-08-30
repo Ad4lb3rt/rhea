@@ -7,11 +7,18 @@ import Layout from "../layouts/Layout.astro";
         <div class="inputs-container">
             <div class="inputs">
                 <label for="number-input">input</label>
-                <input id="number-input" />
+                <textarea rows="1" id="number-input"></textarea>
             </div>
             <div class="inputs">
                 <label for="base-input">base</label>
-                <input id="base-input" type="number" min="2" max="36" placeholder="2 - 36" value="10"/>
+                <input
+                    id="base-input"
+                    type="number"
+                    min="2"
+                    max="36"
+                    placeholder="2 - 36"
+                    value="10"
+                />
             </div>
         </div>
 
@@ -51,7 +58,26 @@ import Layout from "../layouts/Layout.astro";
     }
 
     input {
-        width: 200px;
+        width: 220px;
+
+        padding: 10px;
+
+        outline: none;
+
+        border-radius: 12px;
+        border: 1px solid #252525;
+
+        background-color: #191919;
+        color: white;
+
+        font-size: 14px;
+    }
+
+    textarea {
+        height: auto;
+        min-width: 220px;
+        max-width: 220px;
+        field-sizing: content;
 
         padding: 10px;
 
@@ -81,6 +107,7 @@ import Layout from "../layouts/Layout.astro";
     .outputs {
         display: flex;
         flex-direction: column;
+
         gap: 10px;
         margin-top: 32px;
     }
@@ -89,23 +116,28 @@ import Layout from "../layouts/Layout.astro";
         display: flex;
         flex-direction: column;
         gap: 6px;
+        overflow-wrap: break-word;
     }
 
     .output-value {
         background-color: #141414;
         border: 1px solid #191919;
         padding: 10px;
-        width: 200px;
+        width: 220px;
         border-radius: 12px;
         font-size: 14px;
-        height: 17px;
+        min-height: 17px;
     }
 </style>
 <script>
-    import { Convertor } from "../scripts/Convertor"
+    import { Convertor } from "../scripts/Convertor";
 
-    const numberInput : HTMLInputElement = document.getElementById("number-input")! as HTMLInputElement;
-    const baseInput : HTMLInputElement = document.getElementById("base-input")! as HTMLInputElement;
+    const numberInput: HTMLInputElement = document.getElementById(
+        "number-input",
+    )! as HTMLInputElement;
+    const baseInput: HTMLInputElement = document.getElementById(
+        "base-input",
+    )! as HTMLInputElement;
     const binaryOutput = document.getElementById("binary-output")!;
     const octalOutput = document.getElementById("octal-output")!;
     const decimalOutput = document.getElementById("decimal-output")!;
@@ -117,47 +149,49 @@ import Layout from "../layouts/Layout.astro";
     numberInput.addEventListener("input", RefreshConvertors);
     baseInput.addEventListener("input", RefreshConvertors);
 
-    function RefreshConvertors()
-    {
-        let input : string = numberInput.value;
-        let inputBase : number = parseInt(baseInput.value);
+    function RefreshConvertors() {
+        let input: string = numberInput.value;
+        let inputBase: number = parseInt(baseInput.value);
 
-        let binary : string = Convertor.BaseToBase(input, inputBase, 2);
-        let hex : string = Convertor.BaseToBase(input, inputBase, 16);
-        if(binary !== "NaN")
-        {
+        let binary: string = Convertor.BaseToBase(input, inputBase, 2);
+        let hex: string = Convertor.BaseToBase(input, inputBase, 16);
+        if (binary !== "NaN") {
             //Binary special formatting
-            let fixedBinary : string = "";
-            let currentByte : string = "";
-            for(let i : number = binary.length-1; i >= 0; i--)
-            {
+            let fixedBinary: string = "";
+            let currentByte: string = "";
+            for (let i: number = binary.length - 1; i >= 0; i--) {
                 currentByte = binary[i] + currentByte;
-                if(currentByte.length === 8 || i === 0)
-                {
-                    fixedBinary = currentByte.padStart(8, "0") + (fixedBinary.length > 0 ? " " : "") + fixedBinary;
+                if (currentByte.length === 8 || i === 0) {
+                    fixedBinary =
+                        currentByte.padStart(8, "0") +
+                        (fixedBinary.length > 0 ? " " : "") +
+                        fixedBinary;
                     currentByte = "";
                 }
             }
 
             //Hexadecimal special formatting
-            let fixedHex : string = "";
-            let currentHexByte : string = "";
-            for(let i : number = hex.length-1; i >= 0; i--)
-            {
+            let fixedHex: string = "";
+            let currentHexByte: string = "";
+            for (let i: number = hex.length - 1; i >= 0; i--) {
                 currentHexByte = hex[i] + currentHexByte;
-                if(currentHexByte.length === 2 || i === 0)
-                {
-                    fixedHex = currentHexByte.padStart(2, "0") + (fixedHex.length > 0 ? " " : "") + fixedHex;
+                if (currentHexByte.length === 2 || i === 0) {
+                    fixedHex =
+                        currentHexByte.padStart(2, "0") +
+                        (fixedHex.length > 0 ? " " : "") +
+                        fixedHex;
                     currentHexByte = "";
                 }
             }
 
             binaryOutput.textContent = fixedBinary;
             hexOutput.textContent = fixedHex.toUpperCase();
-            base36Output.textContent = Convertor.BaseToBase(input, inputBase, 36).toUpperCase();
-        }
-        else
-        {
+            base36Output.textContent = Convertor.BaseToBase(
+                input,
+                inputBase,
+                36,
+            ).toUpperCase();
+        } else {
             binaryOutput.textContent = binary;
             hexOutput.textContent = hex;
             base36Output.textContent = "NaN";
@@ -166,5 +200,4 @@ import Layout from "../layouts/Layout.astro";
         octalOutput.textContent = Convertor.BaseToBase(input, inputBase, 8);
         decimalOutput.textContent = Convertor.BaseToBase(input, inputBase, 10);
     }
-
 </script>
