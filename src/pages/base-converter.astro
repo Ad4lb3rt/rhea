@@ -132,10 +132,10 @@ import Layout from "../layouts/Layout.astro";
 <script>
     import { Convertor } from "../scripts/Convertor";
 
-    const numberInput: HTMLInputElement = document.getElementById(
+    const numberInput : HTMLInputElement = document.getElementById(
         "number-input",
     )! as HTMLInputElement;
-    const baseInput: HTMLInputElement = document.getElementById(
+    const baseInput : HTMLInputElement = document.getElementById(
         "base-input",
     )! as HTMLInputElement;
     const binaryOutput = document.getElementById("binary-output")!;
@@ -150,16 +150,16 @@ import Layout from "../layouts/Layout.astro";
     baseInput.addEventListener("input", RefreshConvertors);
 
     function RefreshConvertors() {
-        let input: string = numberInput.value;
-        let inputBase: number = parseInt(baseInput.value);
+        let input : string = numberInput.value;
+        let inputBase : number = parseInt(baseInput.value);
 
-        let binary: string = Convertor.BaseToBase(input, inputBase, 2);
-        let hex: string = Convertor.BaseToBase(input, inputBase, 16);
+        let binary : string = Convertor.BaseToBase(input, inputBase, 2);
+        let hex : string = Convertor.BaseToBase(input, inputBase, 16);
         if (binary !== "NaN") {
             //Binary special formatting
-            let fixedBinary: string = "";
-            let currentByte: string = "";
-            for (let i: number = binary.length - 1; i >= 0; i--) {
+            let fixedBinary : string = "";
+            let currentByte : string = "";
+            for (let i : number = binary.length - 1; i >= 0; i--) {
                 currentByte = binary[i] + currentByte;
                 if (currentByte.length === 8 || i === 0) {
                     fixedBinary =
@@ -171,9 +171,9 @@ import Layout from "../layouts/Layout.astro";
             }
 
             //Hexadecimal special formatting
-            let fixedHex: string = "";
-            let currentHexByte: string = "";
-            for (let i: number = hex.length - 1; i >= 0; i--) {
+            let fixedHex : string = "";
+            let currentHexByte : string = "";
+            for (let i : number = hex.length - 1; i >= 0; i--) {
                 currentHexByte = hex[i] + currentHexByte;
                 if (currentHexByte.length === 2 || i === 0) {
                     fixedHex =

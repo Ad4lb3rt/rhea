@@ -1,14 +1,14 @@
 
 export abstract class Convertor
 {
-    public static BaseToBase(input: string, inputBase: number, outputBase: number) : string
+    public static BaseToBase(input : string, inputBase : number, outputBase : number) : string
     {
         if(input.length === 0) return "0";
         let decimal : number = parseInt(input, inputBase);
         return Number(decimal).toString(outputBase);
     }
 
-    public static TextToDecimal(input: string) : string
+    public static TextToDecimal(input : string) : string
     {
         let result : string = "";
         const chars : string[] = input.split("");
@@ -19,7 +19,7 @@ export abstract class Convertor
         return result.trimEnd();
     }
 
-    public static DecimalToText(input: number[]) : string
+    public static DecimalToText(input : number[]) : string
     {
         let result : string = "";
         for(let i : number = 0; i < input.length; i++)
@@ -29,7 +29,7 @@ export abstract class Convertor
         return result;
     }
 
-    public static HSVtoRGB(h: number, s: number, v: number) : [number, number, number]
+    public static HSVtoRGB(h : number, s : number, v : number) : [number, number, number]
     {
         let c : number = v * s;
         let x : number = c * (1 - Math.abs((h / 60) % 2 - 1));
@@ -48,7 +48,7 @@ export abstract class Convertor
         return [Math.round((rS + m) * 255), Math.round((gS + m) * 255), Math.round((bS + m) * 255)];
     }
 
-    public static RGBtoHSV(r: number, g: number, b: number) : [number, number, number]
+    public static RGBtoHSV(r : number, g : number, b : number) : [number, number, number]
     {
         let rS : number = r / 255;
         let gS : number = g / 255;
