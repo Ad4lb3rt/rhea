@@ -11,7 +11,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
             <div class="inputs">
                 <label for="base-input">base</label>
-                <input id="base-input" type="number" />
+                <input id="base-input" type="number" min="2" max="36" placeholder="2 - 36" value="10"/>
             </div>
         </div>
 
@@ -101,3 +101,70 @@ import Layout from "../layouts/Layout.astro";
         height: 17px;
     }
 </style>
+<script>
+    import { Convertor } from "../scripts/Convertor"
+
+    const numberInput : HTMLInputElement = document.getElementById("number-input")! as HTMLInputElement;
+    const baseInput : HTMLInputElement = document.getElementById("base-input")! as HTMLInputElement;
+    const binaryOutput = document.getElementById("binary-output")!;
+    const octalOutput = document.getElementById("octal-output")!;
+    const decimalOutput = document.getElementById("decimal-output")!;
+    const hexOutput = document.getElementById("hexadecimal-output")!;
+    const base36Output = document.getElementById("base36-output")!;
+
+    RefreshConvertors(); //Initial refresh to keep data up to date on load
+
+    numberInput.addEventListener("input", RefreshConvertors);
+    baseInput.addEventListener("input", RefreshConvertors);
+
+    function RefreshConvertors()
+    {
+        let input : string = numberInput.value;
+        let inputBase : number = parseInt(baseInput.value);
+
+        let binary : string = Convertor.BaseToBase(input, inputBase, 2);
+        let hex : string = Convertor.BaseToBase(input, inputBase, 16);
+        if(binary !== "NaN")
+        {
+            //Binary special formatting
+            let fixedBinary : string = "";
+            let currentByte : string = "";
+            for(let i : number = binary.length-1; i >= 0; i--)
+            {
+                currentByte = binary[i] + currentByte;
+                if(currentByte.length === 8 || i === 0)
+                {
+                    fixedBinary = currentByte.padStart(8, "0") + (fixedBinary.length > 0 ? " " : "") + fixedBinary;
+                    currentByte = "";
+                }
+            }
+
+            //Hexadecimal special formatting
+            let fixedHex : string = "";
+            let currentHexByte : string = "";
+            for(let i : number = hex.length-1; i >= 0; i--)
+            {
+                currentHexByte = hex[i] + currentHexByte;
+                if(currentHexByte.length === 2 || i === 0)
+                {
+                    fixedHex = currentHexByte.padStart(2, "0") + (fixedHex.length > 0 ? " " : "") + fixedHex;
+                    currentHexByte = "";
+                }
+            }
+
+            binaryOutput.textContent = fixedBinary;
+            hexOutput.textContent = fixedHex.toUpperCase();
+            base36Output.textContent = Convertor.BaseToBase(input, inputBase, 36).toUpperCase();
+        }
+        else
+        {
+            binaryOutput.textContent = binary;
+            hexOutput.textContent = hex;
+            base36Output.textContent = "NaN";
+        }
+
+        octalOutput.textContent = Convertor.BaseToBase(input, inputBase, 8);
+        decimalOutput.textContent = Convertor.BaseToBase(input, inputBase, 10);
+    }
+
+</script>
