@@ -1,5 +1,10 @@
 ---
 const path = Astro.url.pathname;
+import BaseIcon from "../assets/BaseIcon.svg";
+import CaseIcon from "../assets/CaseIcon.svg";
+import ColorIcon from "../assets/ColorIcon.svg";
+import PasswordIcon from "../assets/PasswordIcon.svg";
+import RandomIcon from "../assets/RandomIcon.svg";
 ---
 
 <div class="sidebar">
@@ -11,21 +16,21 @@ const path = Astro.url.pathname;
             class={path === "/base-converter" ? "active item" : "item"}
         >
             <div class="icon">
-                <img src="/assets/.svg" alt="" />
+                <BaseIcon width={16} height={16} />
             </div>
             <div>Base Converter</div>
         </a>
 
         <a href="/a" class={path === "/a" ? "active item" : "item"}>
             <div class="icon">
-                <img src="/assets/.svg" alt="" />
+                <CaseIcon width={16} height={16} />
             </div>
             <div>Case Converter</div>
         </a>
 
         <a href="/b" class={path === "/b" ? "active item" : "item"}>
             <div class="icon">
-                <img src="/assets/.svg" alt="" />
+                <ColorIcon width={16} height={16} />
             </div>
             <div>Color Converter</div>
         </a>
@@ -36,14 +41,14 @@ const path = Astro.url.pathname;
 
         <a href="/c" class={path === "/c" ? "active item" : "item"}>
             <div class="icon">
-                <img src="/assets/.svg" alt="" />
+                <PasswordIcon width={16} height={16} />
             </div>
             <div>Password Generator</div>
         </a>
 
         <a href="/d" class={path === "/d" ? "active item" : "item"}>
             <div class="icon">
-                <img src="/assets/.svg" alt="" />
+                <RandomIcon width={16} height={16} />
             </div>
             <div>Random Data Generator</div>
         </a>

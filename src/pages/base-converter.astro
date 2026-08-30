@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import CopyIcon from "../assets/CopyIcon.svg";
 ---
 
 <Layout>
@@ -26,26 +27,41 @@ import Layout from "../layouts/Layout.astro";
             <div class="output">
                 <label for="binary-output">Binary</label>
                 <div id="binary-output" class="output-value">00000000</div>
+                <button class="copy-button">
+                    <CopyIcon width={16} height={16} />
+                </button>
             </div>
 
             <div class="output">
                 <label for="octal-output">Octal</label>
                 <div id="octal-output" class="output-value">00000000</div>
+                <button class="copy-button">
+                    <CopyIcon width={16} height={16} />
+                </button>
             </div>
 
             <div class="output">
                 <label for="decimal-output">Decimal</label>
                 <div id="decimal-output" class="output-value">00000000</div>
+                <button class="copy-button">
+                    <CopyIcon width={16} height={16} />
+                </button>
             </div>
 
             <div class="output">
                 <label for="hexadecimal-output">Hexadecimal</label>
                 <div id="hexadecimal-output" class="output-value">00000000</div>
+                <button class="copy-button">
+                    <CopyIcon width={16} height={16} />
+                </button>
             </div>
 
             <div class="output">
                 <label for="base36-output">Base36</label>
                 <div id="base36-output" class="output-value">00000000</div>
+                <button class="copy-button">
+                    <CopyIcon width={16} height={16} />
+                </button>
             </div>
         </div>
     </div>
@@ -117,6 +133,42 @@ import Layout from "../layouts/Layout.astro";
         flex-direction: column;
         gap: 6px;
         overflow-wrap: break-word;
+        position: relative;
+        color: #dadada;
+    }
+
+    .copy-button {
+        position: absolute;
+        top: 30px;
+        right: 6px;
+
+        width: 30px;
+        height: 30px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 6px;
+
+        border: none;
+        border-radius: 8px;
+
+        background: #252525;
+        box-shadow: -4px 4px 4px 0px #141414;
+
+        opacity: 0;
+
+        cursor: pointer;
+        transition: opacity 0.15s ease-in-out;
+    }
+
+    .output:hover .copy-button {
+        opacity: 1;
+    }
+
+    .copy-button:hover {
+        background: #303030;
     }
 
     .output-value {
@@ -132,10 +184,10 @@ import Layout from "../layouts/Layout.astro";
 <script>
     import { Convertor } from "../scripts/Convertor";
 
-    const numberInput : HTMLInputElement = document.getElementById(
+    const numberInput: HTMLInputElement = document.getElementById(
         "number-input",
     )! as HTMLInputElement;
-    const baseInput : HTMLInputElement = document.getElementById(
+    const baseInput: HTMLInputElement = document.getElementById(
         "base-input",
     )! as HTMLInputElement;
     const binaryOutput = document.getElementById("binary-output")!;
@@ -150,16 +202,16 @@ import Layout from "../layouts/Layout.astro";
     baseInput.addEventListener("input", RefreshConvertors);
 
     function RefreshConvertors() {
-        let input : string = numberInput.value;
-        let inputBase : number = parseInt(baseInput.value);
+        let input: string = numberInput.value;
+        let inputBase: number = parseInt(baseInput.value);
 
-        let binary : string = Convertor.BaseToBase(input, inputBase, 2);
-        let hex : string = Convertor.BaseToBase(input, inputBase, 16);
+        let binary: string = Convertor.BaseToBase(input, inputBase, 2);
+        let hex: string = Convertor.BaseToBase(input, inputBase, 16);
         if (binary !== "NaN") {
             //Binary special formatting
-            let fixedBinary : string = "";
-            let currentByte : string = "";
-            for (let i : number = binary.length - 1; i >= 0; i--) {
+            let fixedBinary: string = "";
+            let currentByte: string = "";
+            for (let i: number = binary.length - 1; i >= 0; i--) {
                 currentByte = binary[i] + currentByte;
                 if (currentByte.length === 8 || i === 0) {
                     fixedBinary =
@@ -171,9 +223,9 @@ import Layout from "../layouts/Layout.astro";
             }
 
             //Hexadecimal special formatting
-            let fixedHex : string = "";
-            let currentHexByte : string = "";
-            for (let i : number = hex.length - 1; i >= 0; i--) {
+            let fixedHex: string = "";
+            let currentHexByte: string = "";
+            for (let i: number = hex.length - 1; i >= 0; i--) {
                 currentHexByte = hex[i] + currentHexByte;
                 if (currentHexByte.length === 2 || i === 0) {
                     fixedHex =
