@@ -184,6 +184,11 @@ import CopyIcon from "../assets/CopyIcon.svg";
 <script>
     import { Convertor } from "../scripts/Convertor";
 
+    const copyButtons: HTMLCollectionOf<HTMLButtonElement> =
+        document.getElementsByClassName(
+            "copy-button",
+        )! as HTMLCollectionOf<HTMLButtonElement>;
+
     const numberInput: HTMLInputElement = document.getElementById(
         "number-input",
     )! as HTMLInputElement;
@@ -200,6 +205,15 @@ import CopyIcon from "../assets/CopyIcon.svg";
 
     numberInput.addEventListener("input", RefreshConvertors);
     baseInput.addEventListener("input", RefreshConvertors);
+    for (let i: number = 0; i < copyButtons.length; i++) {
+        copyButtons[i].addEventListener("click", () => {
+            CopyToClipboard(
+                copyButtons[i].parentElement?.getElementsByClassName(
+                    "output-value",
+                )![0].textContent!,
+            );
+        });
+    }
 
     function RefreshConvertors() {
         let input: string = numberInput.value;
@@ -251,5 +265,9 @@ import CopyIcon from "../assets/CopyIcon.svg";
 
         octalOutput.textContent = Convertor.BaseToBase(input, inputBase, 8);
         decimalOutput.textContent = Convertor.BaseToBase(input, inputBase, 10);
+    }
+
+    function CopyToClipboard(text: string) {
+        navigator.clipboard.writeText(text);
     }
 </script>
