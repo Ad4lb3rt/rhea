@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CopyIcon from "../assets/CopyIcon.svg";
+import MorphIcon from "morphicons/astro";
+import { Copy } from "lucide";
 ---
 
 <Layout>
@@ -27,40 +29,70 @@ import CopyIcon from "../assets/CopyIcon.svg";
             <div class="output">
                 <label for="binary-output">Binary</label>
                 <div id="binary-output" class="output-value">00000000</div>
-                <button class="copy-button">
-                    <CopyIcon width={16} height={16} />
+                <button
+                    class="copy-button"
+                    id="menu"
+                    type="button"
+                    aria-label="Copy"
+                    aria-expanded="false"
+                >
+                    <MorphIcon icon={Copy} color="lightgray" />
                 </button>
             </div>
 
             <div class="output">
                 <label for="octal-output">Octal</label>
                 <div id="octal-output" class="output-value">00000000</div>
-                <button class="copy-button">
-                    <CopyIcon width={16} height={16} />
+                <button
+                    class="copy-button"
+                    id="menu"
+                    type="button"
+                    aria-label="Copy"
+                    aria-expanded="false"
+                >
+                    <MorphIcon icon={Copy} color="lightgray" />
                 </button>
             </div>
 
             <div class="output">
                 <label for="decimal-output">Decimal</label>
                 <div id="decimal-output" class="output-value">00000000</div>
-                <button class="copy-button">
-                    <CopyIcon width={16} height={16} />
+                <button
+                    class="copy-button"
+                    id="menu"
+                    type="button"
+                    aria-label="Copy"
+                    aria-expanded="false"
+                >
+                    <MorphIcon icon={Copy} color="lightgray" />
                 </button>
             </div>
 
             <div class="output">
                 <label for="hexadecimal-output">Hexadecimal</label>
                 <div id="hexadecimal-output" class="output-value">00000000</div>
-                <button class="copy-button">
-                    <CopyIcon width={16} height={16} />
+                <button
+                    class="copy-button"
+                    id="menu"
+                    type="button"
+                    aria-label="Copy"
+                    aria-expanded="false"
+                >
+                    <MorphIcon icon={Copy} color="lightgray" />
                 </button>
             </div>
 
             <div class="output">
                 <label for="base36-output">Base36</label>
                 <div id="base36-output" class="output-value">00000000</div>
-                <button class="copy-button">
-                    <CopyIcon width={16} height={16} />
+                <button
+                    class="copy-button"
+                    id="menu"
+                    type="button"
+                    aria-label="Copy"
+                    aria-expanded="false"
+                >
+                    <MorphIcon icon={Copy} color="lightgray" />
                 </button>
             </div>
         </div>
@@ -182,6 +214,18 @@ import CopyIcon from "../assets/CopyIcon.svg";
     }
 </style>
 <script>
+    //morph icons
+    import { Copy, Check } from "lucide";
+    import type { MorphIconElement } from "morphicons/element";
+    const btn = document.querySelector<HTMLButtonElement>("#menu")!;
+    const icon = btn.querySelector<MorphIconElement>("morph-icon")!;
+    btn.addEventListener("click", () => {
+        const open = btn.getAttribute("aria-expanded") !== "true";
+        btn.setAttribute("aria-expanded", String(open));
+        icon.icon = open ? Copy : Check;
+    });
+
+    // rest of ur shitty code
     import { Convertor } from "../scripts/Convertor";
 
     const copyButtons: HTMLCollectionOf<HTMLButtonElement> =
