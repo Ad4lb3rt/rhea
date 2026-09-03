@@ -5,6 +5,8 @@ import CaseIcon from "../assets/CaseIcon.svg";
 import ColorIcon from "../assets/ColorIcon.svg";
 import PasswordIcon from "../assets/PasswordIcon.svg";
 import RandomIcon from "../assets/RandomIcon.svg";
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <div class="sidebar">
@@ -12,8 +14,8 @@ import RandomIcon from "../assets/RandomIcon.svg";
         <div class="category-title">converters</div>
 
         <a
-            href="/base-converter"
-            class={path === "/base-converter" ? "active item" : "item"}
+            href=`${base}/base-converter`
+            class={path === `${base}/base-converter` ? "active item" : "item"}
         >
             <div class="icon">
                 <BaseIcon width={16} height={16} />
@@ -21,14 +23,20 @@ import RandomIcon from "../assets/RandomIcon.svg";
             <div>Base Converter</div>
         </a>
 
-        <a href="/a" class={path === "/a" ? "active item" : "item"}>
+        <a
+            href=`${base}/a`
+            class={path === `${base}/a` ? "active item" : "item"}
+        >
             <div class="icon">
                 <CaseIcon width={16} height={16} />
             </div>
             <div>Case Converter</div>
         </a>
 
-        <a href="/b" class={path === "/b" ? "active item" : "item"}>
+        <a
+            href=`${base}/b`
+            class={path === `${base}/b` ? "active item" : "item"}
+        >
             <div class="icon">
                 <ColorIcon width={16} height={16} />
             </div>
@@ -39,14 +47,20 @@ import RandomIcon from "../assets/RandomIcon.svg";
     <div class="category">
         <div class="category-title">generators</div>
 
-        <a href="/c" class={path === "/c" ? "active item" : "item"}>
+        <a
+            href=`${base}/c`
+            class={path === `${base}/c` ? "active item" : "item"}
+        >
             <div class="icon">
                 <PasswordIcon width={16} height={16} />
             </div>
             <div>Password Generator</div>
         </a>
 
-        <a href="/d" class={path === "/d" ? "active item" : "item"}>
+        <a
+            href=`${base}/d`
+            class={path === `${base}/d` ? "active item" : "item"}
+        >
             <div class="icon">
                 <RandomIcon width={16} height={16} />
             </div>
